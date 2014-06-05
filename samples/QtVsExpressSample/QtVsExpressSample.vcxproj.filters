@@ -16,9 +16,6 @@
     <Filter Include="Qt">
       <UniqueIdentifier>{c5dd499b-2f34-4dfa-8996-8d9fc3b89b01}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Qt\Form">
-      <UniqueIdentifier>{aca8af44-0af5-4d07-b91e-7cebfd3d439d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Qt\Header Files">
       <UniqueIdentifier>{3f174b2a-d327-48f6-be59-9dd49bf2db84}</UniqueIdentifier>
     </Filter>
@@ -33,6 +30,9 @@
     </Filter>
     <Filter Include="Generated Files\Release">
       <UniqueIdentifier>{545e1147-34ce-4ef8-bf28-ebc2a421ba5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Qt\Forms">
+      <UniqueIdentifier>{aca8af44-0af5-4d07-b91e-7cebfd3d439d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -54,12 +54,15 @@
       <Filter>Qt\Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="Qt\MainWnd.ui">
-      <Filter>Qt\Form</Filter>
+      <Filter>Qt\Forms</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_MainWnd.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Readme.txt" />
   </ItemGroup>
 </Project>

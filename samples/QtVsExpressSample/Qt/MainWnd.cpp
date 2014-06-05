@@ -16,7 +16,7 @@ MainWnd::~MainWnd()
 
 void MainWnd::on_btnOpenVsExpressDialog_clicked()
 {
-	//auto dlg = new ExpressDialog(this);
+	//auto dlg = new gui::qt::ExpressDialog(this);
 	//dlg->setAttribute(Qt::WA_DeleteOnClose);
 	//dlg->show();
 }
