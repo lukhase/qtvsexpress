@@ -111,11 +111,16 @@ Function AddUiCustomBuild($nBuildNode, $conf)
     $nBuild.AppendChild($n)| out-null;
 }
 
-Function AddHeaderCustomBuild($nBuildNode, $conf)
+Function AddHeaderCustomBuild($nBuildNode, $conf, $isDebug)
 {
     $n = $xml.CreateElement('Command', $xml.DocumentElement.NamespaceURI);
     $n.SetAttribute("Condition", "'" + '$(Configuration)|$(Platform)' + "'=='" + "$conf'");
-    $n.InnerText = '"$(QTDIR)\bin\moc.exe" "%(FullPath)" -o "' + $generatedFilesDir + '\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets"';
+	if ($isDebug) {
+		$n.InnerText = '"$(QTDIR)\bin\moc.exe" "%(FullPath)" -o "' + $generatedFilesDir + '\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets"';
+	}
+	else {
+		$n.InnerText = '"$(QTDIR)\bin\moc.exe" "%(FullPath)" -o "' + $generatedFilesDir + '\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets"'; 
+	}
     $nBuild.AppendChild($n)| out-null;
 
     $n = $xml.CreateElement('Message', $xml.DocumentElement.NamespaceURI);
@@ -153,8 +158,8 @@ $newGroup.AppendChild($nBuild)| out-null;
 
 $nBuild = $xml.CreateElement('CustomBuild', $xml.DocumentElement.NamespaceURI);
 $nBuild.SetAttribute("Include", "$dialogDir\$dialogname.h");
-$debugConfs | foreach { AddHeaderCustomBuild $nBuild $_ }
-$releaseConfs | foreach { AddHeaderCustomBuild $nBuild $_ }
+$debugConfs | foreach { AddHeaderCustomBuild $nBuild $_ $TRUE }
+$releaseConfs | foreach { AddHeaderCustomBuild $nBuild $_ $FALSE }
 $newGroup.AppendChild($nBuild)| out-null;
 
 $nClInclude = $xml.CreateElement('ClInclude', $xml.DocumentElement.NamespaceURI);
