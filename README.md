@@ -5,6 +5,8 @@ Utilities for developing Qt applications in Visual Studio Express Editions.
 
 This repository contains some tools/scripts that should make working with Qt in VisualStudio Express editions easier. In the first place, there exists an QtCreate script that automatically creates a new dialog, adds all files to your project and configures the build process.
 
+For some more details about the internals of the script, check out my blog post[1]
+
 To configure this automatic process for your project, first of all copy the QtCreate.ps1 file in the same directory where your project.vcxproj is located.
 Then you have to configure the QtCreate script:
 Replace the default value of the $project variable at the beginning of the file, with the filename of your project.vcxproj file (without extension)
@@ -29,3 +31,5 @@ Or just use a VCS, like everybody else...
 After you have added your first dialog to the project, right click the .ui file and choose 'open with'. There you can enter the path to the Qt designer and set this assignment as default. 
 
 If this description is too confusing or something does not work: take a look at the included example project in this repository and feel free to contact me if there remains anything unclear
+
+[1] http://blog.lukas-haselsteiner.at/2014/06/05/qt-with-visualstudio-express-1/
